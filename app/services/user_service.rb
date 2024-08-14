@@ -1,11 +1,13 @@
+require 'net/http'
+require 'json'
+
 class UserService
   @@users = {} # In-memory storage for users
 
   def self.update_user(user_data)
     email = user_data[:email]
     @@users[email] = user_data # Store or update user data in memory
-
-    mock_update_user(user_data) # Simulate API call to update user
+    send_user_update_to_api(user_data)
   end
 
   def self.get_user(email)
@@ -18,11 +20,14 @@ class UserService
 
   private
 
-  def self.mock_update_user(user_data)
-    if user_data[:email].nil? || user_data[:userId].nil?
-      EventService.mock_response('Invalid parameters', 400)
-    else
-      EventService.mock_response('User updated', 200)
-    end
+  def self.send_user_update_to_api(user_data)
+    uri = URI("https://api.iterable.com/api/users/update")
+    response = Net::HTTP.post(uri, user_data.to_json, "Content-Type" => "application/json")
+    parse_response(response)
+  end
+
+  def self.parse_response(response)
+    parsed_body = JSON.parse(response.body)
+    OpenStruct.new(code: response.code, body: parsed_body)
   end
 end

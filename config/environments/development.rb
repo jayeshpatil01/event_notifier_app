@@ -1,4 +1,5 @@
 require "active_support/core_ext/integer/time"
+require Rails.root.join('lib/webmock_stubs')
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -75,4 +76,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  WebMockStubs.setup_stubs
 end
