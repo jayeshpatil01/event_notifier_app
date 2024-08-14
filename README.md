@@ -1,24 +1,29 @@
-# README
+# EventNotifierApp
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Overview
 
-Things you may want to cover:
+EventNotifierApp is a Ruby on Rails application that integrates with the Iterable API to create and manage events associated with users. The application demonstrates how to mock API requests using WebMock during development and testing.
 
-* Ruby version
+## Features
 
-* System dependencies
+- Create events (`EventA`, `EventB`) associated with users.
+- Send email notifications for specific events.
+- Mock third-party API interactions for development and testing.
+- Simple user authentication with Devise.
 
-* Configuration
+## Setup Instructions
 
-* Database creation
+### Prerequisites
 
-* Database initialization
+- Ruby 3.0.7
+- Rails 6.1.7.8
+- SQLite (or your preferred database)
+- Bundler
 
-* How to run the test suite
+### Installation
 
-* Services (job queues, cache servers, search engines, etc.)
+1. **Clone the Repository:**
 
-* Deployment instructions
-
-* ...
+   ```bash
+   git clone https://github.com/yourusername/event_notifier_app.git
+   cd event_notifier_app
