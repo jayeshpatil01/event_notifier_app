@@ -13,4 +13,6 @@ Rails.application.routes.draw do
 
   post 'create_event_a', to: 'events#create_event_a'
   post 'create_event_b', to: 'events#create_event_b'
+
+  resources :events, only: [:index]
 end

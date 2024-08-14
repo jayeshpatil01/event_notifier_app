@@ -26,17 +26,24 @@ class EventsController < ApplicationController
 
   def handle_response(response, success_message)
     if response.code == '200'
-      render json: { message: success_message }, status: :ok
+      # render json: { message: success_message }, status: :ok
+      @json_response = { message: success_message, data: response.body }
     else
-      render json: { error: JSON.parse(response.body)['msg'] }, status: response.code.to_i
+      # render json: { error: JSON.parse(response.body)['msg'] }, status: response.code.to_i
+      @json_response = { error: response.body['msg'] }
     end
+
+    render :show_event_response
   end
 
   def user_data
     {
       email: current_user.email,
       userId: current_user.id.to_s,
-      dataFields: {},
+      dataFields: {
+        firstName: current_user.first_name,
+        lastName: current_user.last_name
+      },
       preferUserId: true,
       mergeNestedObjects: true,
       createNewFields: true
