@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Notifier</title>
+</head>
+<body class="container mt-5">
+  <% if user_signed_in? %>
+    <p>
+      Logged in as <%= current_user.email %> |
+      <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+    </p>
+  <% end %>
+
+  <h1 class="text-center mb-4">Event Notifier</h1>
+
+  <div class="d-flex justify-content-center mb-4">
+    <%= button_to 'Create Event A', create_event_a_path, method: :post, class: 'btn btn-primary mr-2' %>
+    <%= button_to 'Create Event B', create_event_b_path, method: :post, class: 'btn btn-success' %>
+  </div>
+
+  <h2>Created Events:</h2>
+  <ul class="list-group mb-4">
+    <% @events.each do |event| %>
+      <li class="list-group-item">
+        <strong>Event:</strong> <%= event[:eventName] %> <br>
+        <strong>User Email:</strong> <%= event[:email] %> <br>
+        <strong>User ID:</strong> <%= event[:userId] %> <br>
+        <strong>Created At:</strong> <%= Time.at(event[:createdAt]) %> <br>
+      </li>
+    <% end %>
+  </ul>
+
+  <h2>Stored Users:</h2>
+  <ul class="list-group">
+    <% @users.each do |email, user| %>
+      <li class="list-group-item">
+        <strong>Email:</strong> <%= email %> <br>
+        <strong>User ID:</strong> <%= user[:userId] %> <br>
+      </li>
+    <% end %>
+  </ul>
+
+</body>
+</html>
