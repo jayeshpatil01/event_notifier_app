@@ -41,6 +41,19 @@ module WebMockStubs
         headers: { 'Content-Type' => 'application/json' }
       )
 
+    # Failure response stubs for invalid parameters
+    WebMock.stub_request(:post, "https://api.iterable.com/api/users/update")
+      .with(body: hash_including(email: nil))
+      .to_return(status: 400, body: { msg: "Invalid parameters", code: "Error" }.to_json, headers: { 'Content-Type' => 'application/json' })
+
+    WebMock.stub_request(:post, "https://api.iterable.com/api/events/track")
+      .with(body: hash_including(eventName: 'InvalidEvent'))
+      .to_return(status: 400, body: { msg: "Invalid parameters", code: "Error" }.to_json, headers: { 'Content-Type' => 'application/json' })
+
+    WebMock.stub_request(:post, "https://api.iterable.com/api/email/target")
+      .with(body: hash_including(recipientEmail: nil))
+      .to_return(status: 400, body: { msg: "Invalid parameters", code: "Error" }.to_json, headers: { 'Content-Type' => 'application/json' })
+
     # Debugging WebMock interactions
     WebMock.allow_net_connect!
     WebMock.after_request do |request_signature, response|

@@ -18,7 +18,8 @@ class EventsController < ApplicationController
       email_response = EventService.send_email(email_data)
       handle_response(email_response, 'Event B created and email sent')
     else
-      render json: { error: 'Failed to create Event B' }, status: :bad_request
+      @json_response = { error: 'Failed to create Event B' }
+      render :show_event_response, status: :bad_request
     end
   end
 
@@ -26,10 +27,8 @@ class EventsController < ApplicationController
 
   def handle_response(response, success_message)
     if response.code == '200'
-      # render json: { message: success_message }, status: :ok
       @json_response = { message: success_message, data: response.body }
     else
-      # render json: { error: JSON.parse(response.body)['msg'] }, status: response.code.to_i
       @json_response = { error: response.body['msg'] }
     end
 
