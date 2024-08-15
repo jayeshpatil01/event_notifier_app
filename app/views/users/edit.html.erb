@@ -1,0 +1,35 @@
+<div class="container mt-5">
+<h1>Edit User</h1>
+
+<%= form_for(@user) do |f| %>
+  <div class="form-group">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control', autocomplete: "new-password" %>
+    <small>(Leave blank if you don't want to change the password)</small>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "new-password" %>
+  </div>
+
+  <%= f.submit 'Update User', class: 'btn btn-primary' %>
+<% end %>
+
+<%= link_to 'Back', users_path, class: 'btn btn-secondary' %>
+</div>
