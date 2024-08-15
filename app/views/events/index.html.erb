@@ -35,6 +35,18 @@
       <%= button_to 'Create Event B', create_event_b_path, method: :post, class: 'btn btn-success' %>
     </div>
 
+    <!-- Search Form -->
+    <div class="mb-4">
+      <%= form_with url: events_path, method: :get, local: true do %>
+        <div class="input-group">
+          <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Search events by name or user email..." %>
+          <div class="input-group-append">
+            <%= submit_tag "Search", class: "btn btn-outline-secondary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
     <h2>Created Events:</h2>
     <ul class="list-group mb-4">
       <% @events.each do |event| %>

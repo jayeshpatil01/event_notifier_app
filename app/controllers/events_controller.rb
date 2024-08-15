@@ -1,7 +1,15 @@
 class EventsController < ApplicationController
 
   def index
-    @events = EventService.get_events # Retrieve events to display
+    # Retrieve events to display
+    if params[:query].present?
+      @events = EventService.get_events.select do |event|
+        event[:eventName].downcase.include?(params[:query].downcase) ||
+        event[:email].downcase.include?(params[:query].downcase)
+      end
+    else
+      @events = EventService.get_events
+    end
     @users = UserService.get_users # Retrieve users to display (if needed)
   end
 

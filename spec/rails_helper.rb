@@ -71,7 +71,7 @@ def build_event_data(event_name)
     email: 'test@example.com',
     userId: '123',
     eventName: 'EventA',
-    id: SecureRandom.alphanumeric(9),
+    id: "fpb2XXIRo",
     createdAt: Time.now.to_i,
     dataFields: {}
   }
